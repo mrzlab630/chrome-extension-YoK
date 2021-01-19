@@ -8,7 +8,7 @@
 
 расширение находит ссылки на фильм
 
-![preview: YoK --> смотри фильмы на kinopoisk.ru ](https://github.com/mrzlab630/chrome-extension-YoK/blob/master/docs/imgs/preview.png?raw=true)
+![preview: YoK --> смотри фильмы на kinopoisk.ru ](https://github.com/mrzlab630/chrome-extension-YoK/blob/main/docs/imgs/preview.png?raw=true)
 
 
 ### Инструкция
