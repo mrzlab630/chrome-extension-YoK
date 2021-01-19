@@ -1,0 +1,34 @@
+.yohoho-block{
+    font-family: Graphik Kinopoisk LC Web,Arial,Tahoma,Verdana,sans-serif;
+    color:tomato;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    -ms-box-orient: horizontal;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -moz-flex;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+.yohoho-block a {
+    text-decoration: none;
+    color: antiquewhite;
+}
+.yohoho-itm{
+    margin: 5px;
+    border-radius: 6px;
+    background-color: #ff6600;
+    text-transform: uppercase;
+    color: aliceblue;
+    padding:15px;
+    font-size: 13px;
+    font-weight: 500;
+
+}
+.yohoho-title span{
+padding-right: 10px;
+}
