@@ -125,9 +125,7 @@ const renderYoBlock = function (players) {
 }
 
 
-
-
-document.body.onload = async () =>{
+const go = async () =>{
     /*
 "https://ahoy.yohoho.online?cache746"
 "player=videocdn%2Ckodik%2Ccollaps%2Chdvb%2Cbazon%2Custore%2Calloha%2Cpleer%2Cvideospider%2Ctorrent&kinopoisk=1112702"
@@ -159,3 +157,5 @@ videocdn,kodik,collaps,hdvb,bazon,ustore,alloha,pleer,videospider,torrent
     }
 
 }
+
+document.body.onload = go()
