@@ -11,6 +11,17 @@
 
 {
 
+    const InjectCode = (func) =>{
+
+        if(!func){
+            return
+        }
+
+        const script = document.createElement('script')
+        script.textContent = `(${func})();`
+        document.body.append(script)
+    }
+
     const getYoLink = function ()
     {
 
@@ -24,7 +35,7 @@
 
     }
 
-    const yo_get = async function (url, body,callback)
+    const yo_get = async function (url, body)
     {
         try {
 
@@ -33,29 +44,11 @@
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
                 },
-                body: body //JSON.stringify(body) // body data type must match "Content-Type" header
+                body: body
             });
 
             const res =   await response.text()
             return JSON.parse(res);
-
-
-            /*
-                    const YoXmlHttp = new XMLHttpRequest();
-                    YoXmlHttp.onreadystatechange = function() {
-                        if (YoXmlHttp.readyState === 4) {
-                            if (YoXmlHttp.status === 200) {
-                                callback(YoXmlHttp.responseText);
-                            }
-                            else {
-                                callback({}, '');
-                            }
-                        }
-                    };
-                    YoXmlHttp.open('POST', url, true);
-                    YoXmlHttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-                    YoXmlHttp.send(body);
-    */
 
         }catch (e) {
             console.error({error:e.message})
@@ -137,7 +130,7 @@
                                                                                 class="yohoho-itm"
                                                                                 data-iframe="${iframe}"
                                                                                 data-action="link"
-                                                                                >${quality} ${translate}</button>`)
+                                                                                >${quality || translate ? `${quality} ${translate}` : `открыть`}</button>`)
 
 
             const renderPlayers = players ? Object.keys(players).map((itm,idx) => {
@@ -166,7 +159,6 @@
         }
     }
 
-
     const renderPopup = function ()
     {
         const {iframe} = window?.YoK || false
@@ -180,6 +172,7 @@
     <div id="yohoho-popup" class="yohoho-popup">
       <div class="yohoho-popup-content">
         <span class="yohoho-popup-closer" data-action="exit">&#215;</span>
+        <div id="yohoho-popup-menu"></div>
         <div id="yohoho-popup-iframe-loading">
                     <div class="yohoho-spinner-box">
                       <div class="yohoho-pulse-container">  
@@ -199,7 +192,6 @@
         createNewElement({tag,id,className,content,inBody})
 
     }
-
 
     const action = async function ()
     {
@@ -245,9 +237,28 @@
     renderPopup()
     action()
 
+    const scriptToInject = () => {
 
+        window.iframeErrload = function (err){
+            console.log('iframeErrload',err)
+        }
+
+        window.iframePreload = function (){
+
+            const yohohoLoading = document.getElementById('yohoho-popup-iframe-loading')
+            const yohohoPopupIframe = document.getElementById('yohoho-popup-iframe')
+
+            yohohoLoading.classList.add("yohoho-popup-off")
+            yohohoPopupIframe.classList.remove("yohoho-popup-off")
+        }
+
+    };
+
+    InjectCode(scriptToInject)
 
 }
+
+
 
 window.onclick = async e => {
 
@@ -259,29 +270,42 @@ window.onclick = async e => {
 
     const yohohoPopup = document.getElementById('yohoho-popup-wp')
     const yohohoPopupIframe = document.getElementById('yohoho-popup-iframe')
+    const yohohoPopupExternalLink = document.getElementById('yohoho-popup-menu')
     const yohohoLoading = document.getElementById('yohoho-popup-iframe-loading')
 
-
-
-    switch (action || 'none') {
-
-        case "link":
-
-            yohohoPopupIframe.innerHTML = `<iframe                                                
-                                                src="${iframe}" 
-                                                class="yohoho-popup-iframe" 
-                                                allow="fullscreen" frameborder="0"
+    const iframeRender = `<iframe 
+                                  onload="iframePreload()"
+                                  onerror="iframeErrload('onerror')"
+                                  src="${iframe}" 
+                                  class="yohoho-popup-iframe" 
+                                  allow="fullscreen" 
+                                  frameborder="0"
                                                 >                    
             <div class="yohoho-popup-iframe-info">
             Ваш браузер не поддерживает фреймы! <a href="${iframe}" target="_blank"/>открыть видео в новом окне</a>
             </div>
          </iframe>`
 
-            yohohoPopup.classList.remove("yohoho-popup-off")
+    const menuRender = `<a class="yohoho-popup-btn" href="${iframe}" target="_blank">в новом окне<a/>
+                                                <button 
+                                                        id="yohoho-popup-iframe-refresh" 
+                                                        data-action="iframe-refresh"
+                                                        data-iframe="${iframe}" 
+                                                        class="yohoho-popup-btn"
+                                                >Обновить</button>`
 
-            await sleep(3000)
-            yohohoLoading.classList.add("yohoho-popup-off")
-            yohohoPopupIframe.classList.remove("yohoho-popup-off")
+
+
+    switch (action || 'none') {
+
+        case 'iframe-refresh':
+        case "link":
+            yohohoPopupExternalLink.innerHTML = menuRender
+            yohohoPopupIframe.innerHTML = iframeRender
+
+            yohohoLoading.classList.remove("yohoho-popup-off")
+            yohohoPopupIframe.classList.add("yohoho-popup-off")
+            yohohoPopup.classList.remove("yohoho-popup-off")
 
             return
 
@@ -294,7 +318,7 @@ window.onclick = async e => {
 
             return;
         default:
-            console.log('action')
+            console.log('action:',action)
     }
 
 
