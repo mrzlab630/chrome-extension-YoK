@@ -9,11 +9,11 @@
  */
 
 chrome.tabs.onUpdated.addListener(function (tabId , info) {
-    if (info.status === 'complete') {
+   // if (info.status === 'complete') {
         chrome.tabs.executeScript({
             file: 'js/action.js',
             runAt: "document_start"
         }, () => chrome.runtime.lastError)
-    }
+  //  }
 });
 

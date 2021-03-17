@@ -36,7 +36,7 @@
     color: #fff;
     background: #282828;
     position: relative;
-    padding: 8px 10px 9px;
+    padding: 3px 8px;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
     margin: 0;
@@ -158,7 +158,7 @@ padding-right: 10px;
     justify-content: center;
     width: 100%;
     height: 95%;
-    padding-top: 44px;
+    padding-top: 30px;
     margin: auto;
 }
 
@@ -223,3 +223,77 @@ padding-right: 10px;
     margin: 0;
 }
 
+.yohoho-logo-info{
+    cursor: default;
+    width: 257px;
+    height: 44px;
+    color: #fff;
+    background: #282828;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    font-family: Graphik Kinopoisk LC Web,Arial,Tahoma,Verdana,sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 22px;
+    text-decoration: none;
+    border-radius: 4.4px;
+    margin: 5px 0;
+
+}
+
+.yohoho-svg-right{
+    margin-top: 5px;
+}
+.yohoho-logo-info:hover .yohoho-svg-right{
+    -webkit-animation-name: hvr-icon-wobble-horizontal;
+    animation-name: hvr-icon-wobble-horizontal;
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-timing-function: ease-in-out;
+    animation-timing-function: ease-in-out;
+    -webkit-animation-iteration-count: 1;
+    animation-iteration-count: 1;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+}
+
+@-webkit-keyframes hvr-icon-wobble-horizontal {
+    16.65% {
+        -webkit-transform: translateX(6px);
+        transform: translateX(6px);
+    }
+    33.3% {
+        -webkit-transform: translateX(-5px);
+        transform: translateX(-5px);
+    }
+    49.95% {
+        -webkit-transform: translateX(4px);
+        transform: translateX(4px);
+    }
+    66.6% {
+        -webkit-transform: translateX(-2px);
+        transform: translateX(-2px);
+    }
+    83.25% {
+        -webkit-transform: translateX(1px);
+        transform: translateX(1px);
+    }
+    100% {
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+    }
+}

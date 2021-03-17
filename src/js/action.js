@@ -10,6 +10,9 @@
 
 
 {
+    const rightSvg = (width=32,height=32,fill='#FFFFFF') => `<span class="yohoho-svg-right"><svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" fill="${fill}" viewBox="0 0 24 24"><path d="M15.2929 14.2929L16 15L19 12L16 9L15.2929 9.70711L17.0858 11.5L5 11.5V12.5L17.0857 12.5L15.2929 14.2929Z"/></svg></span>`
+
+    const yoLogo = (info='') => `<span class="yohoho-logo-info">YoK${rightSvg()} ${info}</span>`
 
     const InjectCode = (func) =>{
 
@@ -94,7 +97,7 @@
         newElement.innerHTML = content
 
 
-        return inBody ? document.body.append(newElement) : div.appendChild(newElement)
+        return inBody ?  document.body.append(newElement) : div.appendChild(newElement)
 
     }
 
@@ -133,16 +136,16 @@
                                                                                 >${quality || translate ? `${quality} ${translate}` : `открыть`}</button>`)
 
 
-            const renderPlayers = players ? Object.keys(players).map((itm,idx) => {
+            const renderPlayersAll = players ? Object.keys(players).map((itm,idx) => {
 
                 const {quality, translate, iframe} = players[itm] || false
 
                 if(quality, translate, iframe){
                     return renderPlayer({id:idx,quality, translate, iframe})
                 }
-             '😿 не найдено'
 
-            }).filter(itm => itm).join('') : '😿 не найдено'
+            }).filter(itm => itm) : false
+            const renderPlayers = Array.isArray(renderPlayersAll) && renderPlayersAll.length ? yoLogo('🍿🍿🍿')+' '+renderPlayersAll.join('') : yoLogo(`😿 не найдено`)
 
 
             createNewElement({
@@ -223,7 +226,6 @@
 
 
         }catch (e) {
-            console.error('YoK:',{error:e.message})
             createNewElement({
                 tag:'div',
                 id:'yohoho-error',
@@ -232,10 +234,6 @@
             renderLoading(true)
         }
     }
-
-
-    renderPopup()
-    action()
 
     const scriptToInject = () => {
 
@@ -254,7 +252,15 @@
 
     };
 
-    InjectCode(scriptToInject)
+    const testIsset =  document.querySelector("#yohoho-block")
+
+        if(!testIsset){
+            renderPopup()
+            action()
+
+            InjectCode(scriptToInject)
+        }
+
 
 }
 
