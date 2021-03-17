@@ -12,7 +12,7 @@
 {
     const rightSvg = (width=32,height=32,fill='#FFFFFF') => `<span class="yohoho-svg-right"><svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" fill="${fill}" viewBox="0 0 24 24"><path d="M15.2929 14.2929L16 15L19 12L16 9L15.2929 9.70711L17.0858 11.5L5 11.5V12.5L17.0857 12.5L15.2929 14.2929Z"/></svg></span>`
 
-    const yoLogo = (info='') => `<span class="yohoho-logo-info">YoK${rightSvg()} ${info}</span>`
+    const yoLogo = (info='') => `<span id="yohoho-logo-info" class="yohoho-logo-info">YoK${rightSvg()} ${info}</span>`
 
     const InjectCode = (func) =>{
 
@@ -96,8 +96,25 @@
         newElement.setAttribute('class', className)
         newElement.innerHTML = content
 
+        if(document.readyState !== 'interactive'){
+            return
+        }
 
-        return inBody ?  document.body.append(newElement) : div.appendChild(newElement)
+        const lasrChldr = div.children[div.children.length-1]
+        const lasrChldrId = lasrChldr.getAttribute('id')
+
+
+        if(inBody){
+            return document.body.append(newElement)
+        }
+
+
+        if(lasrChldrId && lasrChldrId === id){
+
+            lasrChldr.parentNode.removeChild(lasrChldr)
+        }
+
+        return div.appendChild(newElement)
 
     }
 
@@ -253,8 +270,9 @@
     };
 
     const testIsset =  document.querySelector("#yohoho-block")
+    const testInfo = document.querySelector("#yohoho-logo-info")
 
-        if(!testIsset){
+        if(!testIsset || !testInfo){
             renderPopup()
             action()
 
