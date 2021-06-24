@@ -88,8 +88,9 @@
 
         const divOne =  document.querySelector(".styles_title__3tVSa")
         const divTwo =  document.querySelector(".styles_watchOnlineContainer__3-xcJ")
+        const divThree =  document.querySelector(".styles_hdContainer__3jCqC ")
 
-        const div = divOne || divTwo
+        const div = divOne || divTwo || divThree
 
         const newElement = document.createElement(tag)
         newElement.setAttribute('id', id)
@@ -271,14 +272,17 @@
 
     const testIsset =  document.querySelector("#yohoho-block")
     const testInfo = document.querySelector("#yohoho-logo-info")
+    const testPopup = document.querySelector('#yohoho-popup')
+
+        if(!testPopup){
+            renderPopup()
+        }
 
         if(!testIsset || !testInfo){
-            renderPopup()
             action()
 
             InjectCode(scriptToInject)
         }
-
 
 }
 
