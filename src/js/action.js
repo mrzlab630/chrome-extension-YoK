@@ -86,7 +86,7 @@
     const createNewElement = function({tag, id, className, content,inBody})
     {
 
-        const divOne =  document.querySelector(".styles_title__3tVSa")
+        const divOne =  document.querySelectorAll('div[class*="styles_title__"]')[0] //".styles_title__3tVSa"
         const divTwo =  document.querySelector(".styles_watchOnlineContainer__3-xcJ")
         const divThree =  document.querySelector(".styles_hdContainer__3jCqC ")
 

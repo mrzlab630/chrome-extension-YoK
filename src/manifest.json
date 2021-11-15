@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name":"YoK --> смотри online",
-  "version": "3.5",
+  "version": "3.6",
   "author": "mrZ <mrz@mrzlab630.pw>",
   "description":  "расширение для сайта kinopoisk.ru, перейди на страницу фильма и смотри",
   "icons": {
