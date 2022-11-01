@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name":"YoK --> смотри online",
-  "version": "4.1",
+  "version": "4.2",
   "author": "mrZ <mrz@mrzlab630.pw>",
   "description":  "расширение для сайта kinopoisk.ru, перейди на страницу фильма и смотри",
   "icons": {
@@ -20,9 +20,6 @@
       "run_at" : "document_start"
     }
   ],
-  "background": {
-    "service_worker": "background.js"
-  },
   "web_accessible_resources": [
     {
       "resources": [
@@ -32,8 +29,7 @@
     }
   ],
   "permissions": [
-    "activeTab",
-    "storage"
+    "activeTab"
   ],
   "host_permissions": ["https://*.kinopoisk.ru/*"]
 }

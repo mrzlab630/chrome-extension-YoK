@@ -10,19 +10,27 @@
 
 const action = async function () {
 
-    let YOK = {}
-
-    const getChromeStorage = async function (keys) {
-        return new Promise((resolve, reject) => {
-            try {
-                chrome.storage.local.get(keys, function (value) {
-                    resolve(value)
-                })
-            } catch (ex) {
-                resolve({})
-            }
-        })
+    const YOK = {
+        yoLink:`https://ahoy.yohoho.cc`,
+        players:['videocdn','kodik','collaps','hdvb','bazon','ustore','alloha','pleer','videospider','torrent','iframe']
     }
+
+
+    const getMovieData = function (){
+        try {
+            const context = document.querySelector('script[type="application/ld+json"]')
+
+            if(!context){
+                throw new Error('context не найден')
+            }
+
+            return  JSON.parse(context.innerHTML)
+
+        }catch (e) {
+            return {error:e?.message}
+        }
+    }
+
     const getMovies = async function (url, body){
         try {
             const response = await fetch(url, {
@@ -44,7 +52,6 @@ const action = async function () {
             return {error:e.message}
         }
     }
-
 
     const newElement = ({tag,id,className,content}) => {
         const el = document.createElement(tag)
@@ -109,14 +116,22 @@ const action = async function () {
 
 
 
-
     try {
-        const storage = await getChromeStorage('YOK')
-        YOK = storage?.YOK
 
-        if(!YOK?.kinopoisk || YOK?.error){
-           throw new Error(YOK?.error)
+        const {url,error} = getMovieData()
+
+        if(error){
+            throw new Error(error)
         }
+
+        const kinopoisk = url.split('/')?.filter(itm => Number(itm)).pop()
+
+        if(!kinopoisk){
+            throw  new Error('id фильма не найден')
+        }
+
+        YOK.kinopoisk = kinopoisk
+
         renderData(progressBar)
 
         /**
@@ -141,9 +156,6 @@ const action = async function () {
         const {error,moviesList} = YOK
 
         if(error){
-
-            console.log({error})
-
             renderInfo(error)
             return
         }
