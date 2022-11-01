@@ -31,7 +31,6 @@
       "matches": ["https://*.kinopoisk.ru/*"]
     }
   ],
-
   "permissions": [
     "activeTab",
     "storage"
