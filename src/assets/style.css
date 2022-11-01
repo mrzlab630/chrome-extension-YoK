@@ -1,25 +1,55 @@
+.yohoho-block-error{
+    width: 100%;
+    margin: auto;
+    position: absolute;
+    z-index: 3;
+    top: 150px;
+    left: 0;
+    right: 0;
+    background: tomato;
+    color: white;
+}
+.yohoho-block-error .yohoho-block-error-wrap{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: flex-start;
+    margin: auto;
+    width: 1280px;
+}
+.yohoho-block-error .yohoho-block-error-wrap div{
+    padding: 0 1em;
+}
+
+
 .yohoho-block{
     font-family: Graphik Kinopoisk LC Web,Arial,Tahoma,Verdana,sans-serif;
-    color:tomato;
-    padding: 0;
-    margin: 0;
-    list-style: none;
-    -ms-box-orient: horizontal;
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -moz-flex;
-    display: -webkit-flex;
+    padding: 1em 0;
     display: flex;
-    -webkit-flex-wrap: wrap;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: flex-start;
+    justify-content: center;
+    align-items: flex-start;
+}
+#yohoho-block-content{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
     flex-wrap: wrap;
+    align-content: center;
+    justify-content: flex-start;
+    align-items: center;
+    padding-top: .3em;
 }
 .yohoho-block a {
     text-decoration: none;
     color: antiquewhite;
 }
 .yohoho-itm{
-    margin: 5px;
+    margin:5px 5px 5px 0;
     border-radius: 6px;
     background-color: #ff6600;
     text-transform: uppercase;
@@ -32,39 +62,13 @@
 .yohoho-itm:hover {
     cursor: pointer;
 }
-.yohoho-popup-btn{
-    color: #fff;
-    background: #282828;
-    position: relative;
-    padding: 3px 8px;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    margin: 0;
-    font-size: 13px;
-    font-weight: 500;
-    cursor: pointer;
-    text-align: center;
-    white-space: nowrap;
-    border: 1px solid rgba(0,0,0,.1);
-    border-radius: 4px;
-    outline: 0;
-    -webkit-box-shadow: 0 1px 2px 0 rgba(0,0,0,.04);
-    box-shadow: 0 1px 2px 0 rgba(0,0,0,.04);
-    -webkit-appearance: none;
-    text-decoration: none;
-}
-.yohoho-title span{
-padding-right: 10px;
-}
-
-
 
 /**
 * loading
 **/
 
 .yohoho-spinner-box {
-    width: 200px;
+    width: 50px;
     height: 50px;
     display: flex;
     justify-content: center;
@@ -115,134 +119,21 @@ padding-right: 10px;
 }
 
 
-
-
 /**
-* popup
-**/
-
-.yohoho-popup-off {
-    display: none !important;
-}
-
-
-.yohoho-popup {
-    display: flex;
-    position: fixed;
-    z-index: 999;
-    top: 15px;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
-
-.yohoho-popup:before {
-    display: block;
-    content: ' ';
-    position: absolute;
-    z-index: 1;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    background-color: #000;
-    opacity: .5;
-}
-#yohoho-popup-menu{
-    position: absolute;
-    top: 10px;
-    left: 10px;
-}
-.yohoho-popup-iframe-wrap{
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    height: 95%;
-    padding-top: 30px;
-    margin: auto;
-}
-
-#yohoho-popup-iframe-loading {
-    margin: auto;
-}
-
-.yohoho-popup-content {
-    display: flex;
-    flex-wrap: wrap;
-    width: 90%;
-    height: 90%;
-    position: absolute;
-    z-index: 2;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
-    background-color: #ff6600;
-    border-radius: 6px;
-    padding: 5px;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-}
-
-.yohoho-popup-checkbox:checked + .yohoho-popup {
-    opacity: 1;
-    display: block;
-}
-
-.yohoho-popup-shower {
-    text-decoration: none;
-    color: antiquewhite;
-}
-
-.yohoho-popup-closer {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    color: #ffffff;
-    font-size: 20px;
-    border: 2px solid #ffffff;
-    display: block;
-    width: 20px;
-    height: 20px;
-    line-height: 20px;
-    text-align: center;
-    border-radius: 50%;
-    cursor: pointer;
-}
-
-.yohoho-popup-closer:hover {
-    background-color: #ff6600;
-    cursor: pointer;
-}
-
-.yohoho-popup-iframe {
-    width: 100%;
-    height: 100%;
-    border: none;
-    margin: 0;
-}
+ *logo
+ **/
 
 .yohoho-logo-info{
+    padding: 0 0.8em;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
     cursor: default;
-    width: 257px;
-    height: 44px;
     color: #fff;
     background: #282828;
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: center;
-    -webkit-justify-content: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
-    -ms-flex-align: center;
-    align-items: center;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
     font-family: Graphik Kinopoisk LC Web,Arial,Tahoma,Verdana,sans-serif;
     font-size: 16px;
     font-weight: 500;
@@ -251,7 +142,7 @@ padding-right: 10px;
     line-height: 22px;
     text-decoration: none;
     border-radius: 4.4px;
-    margin: 5px 0;
+    /*margin: 5px 0;*/
 
 }
 

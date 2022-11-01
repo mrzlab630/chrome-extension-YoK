@@ -1,7 +1,7 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
   "name":"YoK --> смотри online",
-  "version": "3.6",
+  "version": "4",
   "author": "mrZ <mrz@mrzlab630.pw>",
   "description":  "расширение для сайта kinopoisk.ru, перейди на страницу фильма и смотри",
   "icons": {
@@ -11,35 +11,30 @@
     "128": "icons/icon128.png",
     "512": "icons/icon512.png"
   },
-  "browser_action": {
-    "default_title": "YoK --> смотри online",
-    "default_icon": {
-      "16": "icons/icon16.png",
-      "32": "icons/icon32.png",
-      "64": "icons/icon64.png",
-      "128": "icons/icon128.png",
-      "512": "icons/icon512.png"
-    }
-  },
   "content_scripts": [
     {
       "matches": ["https://*.kinopoisk.ru/*"],
-      "css": [ "assets/style.css" ],
+      "css": ["assets/style.css"],
+      "js": ["contentScript.js"],
       "all_frames" : false,
       "run_at" : "document_start"
     }
   ],
   "background": {
-    "scripts": ["js/background.js"],
-    "persistent": false
+    "service_worker": "background.js"
   },
   "web_accessible_resources": [
-    "assets/icons/*",
-    "assets/js/action.js",
-    "assets/style.css"
+    {
+      "resources": [
+        "assets/icons/*"
+      ],
+      "matches": ["https://*.kinopoisk.ru/*"]
+    }
   ],
+
   "permissions": [
-    "https://*.kinopoisk.ru/*",
-    "activeTab"
-  ]
+    "activeTab",
+    "storage"
+  ],
+  "host_permissions": ["https://*.kinopoisk.ru/*"]
 }
