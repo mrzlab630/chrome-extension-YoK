@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name":"YoK --> смотри online",
-  "version": "4.2",
+  "version": "4.3.0",
   "author": "mrZ <mrz@mrzlab630.pw>",
   "description":  "расширение для сайта kinopoisk.ru, перейди на страницу фильма и смотри",
   "icons": {
@@ -13,23 +13,31 @@
   },
   "content_scripts": [
     {
-      "matches": ["https://www.kinopoisk.ru/*","https://kinopoisk.ru/*"],
+      "matches": [
+        "https://www.kinopoisk.ru/*","https://kinopoisk.ru/*"
+      ],
       "css": ["assets/style.css"],
       "js": ["contentScript.js"],
       "all_frames" : false,
       "run_at" : "document_start"
     }
   ],
+  "background": {
+    "service_worker": "service-worker.js"
+  },
   "web_accessible_resources": [
     {
       "resources": [
         "assets/icons/*"
       ],
-      "matches": ["https://www.kinopoisk.ru/*","https://kinopoisk.ru/*"]
+      "matches": [
+        "https://www.kinopoisk.ru/*","https://kinopoisk.ru/*"
+      ]
     }
   ],
   "permissions": [
-    "activeTab"
+    "activeTab",
+    "storage"
   ],
   "host_permissions": ["https://*.kinopoisk.ru/*"]
 }

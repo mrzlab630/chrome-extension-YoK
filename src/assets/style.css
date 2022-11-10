@@ -1,3 +1,16 @@
+.yohoho-error{
+    padding: 13px 18px;
+    background: tomato;
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 22px;
+    text-decoration: none;
+    border-radius: 4.4px;
+}
+
 .yohoho-block-error{
     width: 100%;
     margin: auto;

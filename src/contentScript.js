@@ -36,7 +36,7 @@ const action = async function () {
             const response = await fetch(url, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded', //'application/json',
+                    'Content-Type': 'application/x-www-form-urlencoded',
                     'origin':'https://4h0y.gitlab.io',
                     'referer':'https://4h0y.gitlab.io/',
                     'accept':'*/*',
@@ -66,8 +66,10 @@ const action = async function () {
 
             const buttonBlockVone = document.querySelectorAll('div[class^="styles_buttons__"]')[0]
             const buttonBlockVtwo = document.querySelectorAll('div[class^="styles_watchOnlineBlock__"]')[0]
+            const buttonBlockVthree = document.querySelectorAll('div[class^="styles_watchOnlineDescription__"]')[0]
 
-            const buttonBlock = buttonBlockVtwo || buttonBlockVone
+
+            const buttonBlock = buttonBlockVthree || buttonBlockVtwo || buttonBlockVone
 
             if (!buttonBlock) {
                 throw new Error('блок кнопок не найден ')
@@ -161,7 +163,7 @@ const action = async function () {
         }
 
         if(!moviesList || Object.keys(moviesList).length === 0){
-            renderInfo(`😿 не найдено`)
+            renderInfo(`<span class="yohoho-error">😿 не найдено</span>`)
             return
         }
 
@@ -181,7 +183,7 @@ const action = async function () {
 
         }
         )
-        renderInfo(linkMovieList.length === 0 ? `😿 не найдено` : linkMovieList.join(''))
+        renderInfo(linkMovieList.length === 0 ? `<span class="yohoho-error">😿 не найдено</span>` : linkMovieList.join(''))
 
 
 
@@ -189,4 +191,39 @@ const action = async function () {
 
 }
 
-document.addEventListener("DOMContentLoaded", action)
+const fillContent = () => {
+
+    const url = window.location.href
+    const yBlock = document.getElementById('yohoho-block')
+
+    if(!url?.includes('series') && !url?.includes('film')){
+        return
+    }
+    if(yBlock){
+        yBlock.remove()
+    }
+
+    action()
+
+}
+
+
+document.addEventListener("DOMContentLoaded", fillContent)
+
+
+chrome.storage.onChanged.addListener(changes => {
+    try {
+
+        const {yohoho} = changes
+        const {newValue,oldValue} = yohoho
+
+        if(newValue?.title === oldValue?.title){
+            return
+        }
+        fillContent()
+
+
+    }catch (e) {
+        console.error({yohoho:e.message})
+    }
+})
