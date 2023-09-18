@@ -33,4 +33,4 @@
 
 ~~#### основано на  [4h0y.github.io](https://github.com/4h0y/4h0y.github.io)~~
 
-#### Добавлен как основной источник [kinobox.tv](https://kinobox.tv/docs/api/)
+#### Добавлен, как основной источник [kinobox.tv](https://kinobox.tv/docs/api/)
