@@ -23,9 +23,8 @@ const setChromeStorage = async function (obj)
 
 chrome.tabs.onUpdated.addListener(
      async (tabId, changeInfo,d) => {
-
         if (changeInfo.status === 'complete') {
-            await setChromeStorage({yohoho:d})
+            await setChromeStorage({YOK:d})
         }
     }
 )

@@ -9,10 +9,36 @@
  */
 
 const action = async function () {
-
+   
     const YOK = {
-        yoLink:`https://ahoy.yohoho.cc`,
-        players:['videocdn','kodik','collaps','hdvb','bazon','ustore','alloha','pleer','videospider','torrent','iframe']
+        targetApi:'kinobox',
+        kinopoiskId:null,
+        moviesList:null,
+        error:null,
+        apis: [
+                {
+                    name:'yohoho',
+                    apiLink:`https://ahoy.yohoho.cc`,
+                    players:['videocdn','kodik','collaps','hdvb','bazon','ustore','alloha','pleer','videospider','torrent','iframe'],
+                    method: 'POST',
+                    headers:{
+                        'origin':'https://4h0y.gitlab.io',
+                        'referer':'https://4h0y.gitlab.io/',
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    }
+                },
+                {
+                    name:'kinobox',
+                    apiLink:'https://kinobox.tv/api',
+                    players:['all','main'],
+                    method: 'GET',
+                    headers:{
+                        'origin':'https://kinomix.web.app',
+                        'referer':'https://kinomix.web.app/',
+                        'Content-Type': 'application/json',
+                    }
+                }
+            ]        
     }
 
 
@@ -31,17 +57,15 @@ const action = async function () {
         }
     }
 
-    const getMovies = async function (url, body){
+    const getMovies = async function ({url, method,headers,body}){
         try {
             const response = await fetch(url, {
-                method: 'POST',
+                method,
                 headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                    'origin':'https://4h0y.gitlab.io',
-                    'referer':'https://4h0y.gitlab.io/',
                     'accept':'*/*',
                     'accept-encoding':'gzip, deflate, br',
-                    'user-agent':'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36'
+                    'user-agent':'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36',
+                    ...headers
                 },
                 body
             })
@@ -52,6 +76,13 @@ const action = async function () {
             return {error:e.message}
         }
     }
+
+
+
+
+
+
+
 
     const newElement = ({tag,id,className,content}) => {
         const el = document.createElement(tag)
@@ -78,26 +109,26 @@ const action = async function () {
 
             buttonBlock.appendChild(newElement({
                 tag: 'div',
-                id: 'yohoho-block',
-                className: 'yohoho-block',
-                content: `<div>${yoLogo('🍿🍿🍿')}</div><div id="yohoho-block-content">${content}</div>`
+                id: 'YOK-block',
+                className: 'YOK-block',
+                content: `<div>${yoLogo('🍿🍿🍿')}</div><div id="YOK-block-content">${content}</div>`
             }))
 
         }catch (e) {
             document.body.appendChild(newElement({
                 tag: 'div',
-                id: 'yohoho-block-error',
-                className: 'yohoho-block-error',
-                content: `<div class="yohoho-block-error-wrap"><div>${yoLogo('🍿🍿🍿')}</div><div>${content || e?.message}</div></div>`
+                id: 'YOK-block-error',
+                className: 'YOK-block-error',
+                content: `<div class="YOK-block-error-wrap"><div>${yoLogo('🍿🍿🍿')}</div><div>${content || e?.message}</div></div>`
 
             }))
         }
     }
     const renderInfo =  (content) =>{
-        const yohohoBlock = document.querySelector('div[id="yohoho-block-content"]')
+        const yokBlock = document.querySelector('div[id="YOK-block-content"]')
 
-        if(yohohoBlock){
-            yohohoBlock.innerHTML = content
+        if(yokBlock){
+            yokBlock.innerHTML = content
             return
         }
 
@@ -105,14 +136,14 @@ const action = async function () {
         return renderData(content)
     }
 
-    const linkMovie = ({lable,href}) => `<a class="yohoho-itm" href='${href}' target='_blank'>${lable}</a>`
-    const rightSvg = (width=32,height=32,fill='#FFFFFF') => `<span class="yohoho-svg-right"><svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" fill="${fill}" viewBox="0 0 24 24"><path d="M15.2929 14.2929L16 15L19 12L16 9L15.2929 9.70711L17.0858 11.5L5 11.5V12.5L17.0857 12.5L15.2929 14.2929Z"/></svg></span>`
-    const yoLogo = (info='') => `<span id="yohoho-logo-info" class="yohoho-logo-info">YoK${rightSvg()} ${info}</span>`
-    const progressBar = `<div class="yohoho-spinner-box">
-                      <div class="yohoho-pulse-container">  
-                        <div class="yohoho-pulse-bubble yohoho-pulse-bubble-1"></div>
-                        <div class="yohoho-pulse-bubble yohoho-pulse-bubble-2"></div>
-                        <div class="yohoho-pulse-bubble yohoho-pulse-bubble-3"></div>
+    const linkMovie = ({lable,href}) => `<a class="YOK-itm" href='${href}' target='_blank'>${lable}</a>`
+    const rightSvg = (width=32,height=32,fill='#FFFFFF') => `<span class="YOK-svg-right"><svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" fill="${fill}" viewBox="0 0 24 24"><path d="M15.2929 14.2929L16 15L19 12L16 9L15.2929 9.70711L17.0858 11.5L5 11.5V12.5L17.0857 12.5L15.2929 14.2929Z"/></svg></span>`
+    const yoLogo = (info='') => `<span id="YOK-logo-info" class="YOK-logo-info">YoK${rightSvg()} ${info}</span>`
+    const progressBar = `<div class="YOK-spinner-box">
+                      <div class="YOK-pulse-container">  
+                        <div class="YOK-pulse-bubble YOK-pulse-bubble-1"></div>
+                        <div class="YOK-pulse-bubble YOK-pulse-bubble-2"></div>
+                        <div class="YOK-pulse-bubble YOK-pulse-bubble-3"></div>
                       </div>
                     </div>`
 
@@ -132,7 +163,7 @@ const action = async function () {
             throw  new Error('id фильма не найден')
         }
 
-        YOK.kinopoisk = kinopoisk
+        YOK.kinopoiskId = kinopoisk
 
         renderData(progressBar)
 
@@ -140,61 +171,94 @@ const action = async function () {
          *  loading data
          */
 
-        const player = `player=${encodeURIComponent(YOK?.players.join(','))}`
-        const query = `${player}&kinopoisk=${YOK?.kinopoisk}`
+        const {apiLink,players,method,headers} = YOK.apis.filter(itm => itm.name === YOK.targetApi)?.pop()
+        let player
+        let query
+        let apiUrl = apiLink
 
-        const {result:moviesList, error:loadingErr} = await getMovies(YOK?.yoLink, query)
+        if(!apiLink){
+            throw  new Error('api link не найден')
+        }
 
-        if(loadingErr){
-            throw new Error(loadingErr)
+
+        switch(YOK.targetApi){
+            case 'yohoho':
+                player = `player=${encodeURIComponent(players.join(','))}`
+                query = `${player}&kinopoisk=${YOK?.kinopoiskId}`
+            break
+
+            case 'kinobox':
+                apiUrl = `${apiLink}/players/${players[0]}?kinopoisk=${YOK?.kinopoiskId}`
+            break
+        }
+
+
+        
+
+        const {result:moviesList, error:loadingErr,message:loadingError} = await getMovies({
+            url:apiUrl, 
+            method,
+            headers,
+            body:query
+        })
+
+        if(loadingErr || loadingError){
+            throw new Error(loadingErr || loadingError)
         }
 
         YOK.moviesList = moviesList
 
+        let linkMovieList = []
+
+        switch(YOK.targetApi){
+            case 'yohoho':
+                if(!moviesList || Object.keys(moviesList).length === 0){
+                    renderInfo(`<span class="YOK-error">😿 не найдено</span>`)
+                    return
+                }
+
+                Object.keys(moviesList).forEach(itm => {
+                    const {iframe,quality,translate} = moviesList[itm]
+        
+                    if(!iframe){
+                        return
+                    }
+                        linkMovieList.push( linkMovie({
+                            href:iframe,
+                            lable:quality ? `${quality} ${translate}` : 'смотреть'
+                        })  )        
+                }
+                )
+            break
+
+            case 'kinobox':
+
+                if(!Array.isArray(moviesList) || moviesList.length === 0){
+                    renderInfo(`<span class="YOK-error">😿 не найдено</span>`)
+                    return
+                }
+               
+                linkMovieList = moviesList.map(({iframeUrl,quality,translation}) => linkMovie({
+                    href:iframeUrl,
+                    lable:quality ? `${quality} ${translation}` : 'смотреть'
+                }))
+            break
+            }
+
+
+        renderInfo(linkMovieList.length === 0 ? `<span class="YOK-error">😿 не найдено</span>` : linkMovieList.join(''))
+
+
     } catch (e) {
         YOK.error = e.message
-    } finally {
-
-        const {error,moviesList} = YOK
-
-        if(error){
-            renderInfo(error)
-            return
-        }
-
-        if(!moviesList || Object.keys(moviesList).length === 0){
-            renderInfo(`<span class="yohoho-error">😿 не найдено</span>`)
-            return
-        }
-
-        const linkMovieList = []
-
-        Object.keys(moviesList).forEach(itm => {
-
-            const {iframe,quality,translate} = moviesList[itm]
-
-            if(!iframe){
-                return
-            }
-                linkMovieList.push( linkMovie({
-                    href:iframe,
-                    lable:quality ? `${quality} ${translate}` : 'смотреть'
-                })  )
-
-        }
-        )
-        renderInfo(linkMovieList.length === 0 ? `<span class="yohoho-error">😿 не найдено</span>` : linkMovieList.join(''))
-
-
-
-    }
-
+        renderInfo(`<span class="YOK-error">😿 ${e?.message || 'не найдено'}</span>`)
+    } 
 }
 
 const fillContent = () => {
 
     const url = window.location.href
-    const yBlock = document.getElementById('yohoho-block')
+    const yBlock = document.getElementById('YOK-block')
 
     if(!url?.includes('series') && !url?.includes('film')){
         return
@@ -214,8 +278,8 @@ document.addEventListener("DOMContentLoaded", fillContent)
 chrome.storage.onChanged.addListener(changes => {
     try {
 
-        const {yohoho} = changes
-        const {newValue,oldValue} = yohoho
+        const {YOK} = changes
+        const {newValue,oldValue} = YOK
 
         if(newValue?.title === oldValue?.title){
             return
@@ -224,6 +288,6 @@ chrome.storage.onChanged.addListener(changes => {
 
 
     }catch (e) {
-        console.error({yohoho:e.message})
+        console.error({YOK:e.message})
     }
 })

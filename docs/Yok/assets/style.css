@@ -1,4 +1,4 @@
-.yohoho-error{
+.YOK-error{
     padding: 13px 18px;
     background: tomato;
     color: white;
@@ -11,7 +11,7 @@
     border-radius: 4.4px;
 }
 
-.yohoho-block-error{
+.YOK-block-error{
     width: 100%;
     margin: auto;
     position: absolute;
@@ -23,7 +23,7 @@
     color: white;
     padding: 1em 0;
 }
-.yohoho-block-error .yohoho-block-error-wrap{
+.YOK-block-error .YOK-block-error-wrap{
     display: flex;
     align-items: center;
     flex-direction: row;
@@ -33,12 +33,12 @@
     margin: auto;
     width: 1280px;
 }
-.yohoho-block-error .yohoho-block-error-wrap div{
+.YOK-block-error .YOK-block-error-wrap div{
     padding: 0 1em;
 }
 
 
-.yohoho-block{
+.YOK-block{
     font-family: Graphik Kinopoisk LC Web,Arial,Tahoma,Verdana,sans-serif;
     padding: 1em 0;
     display: flex;
@@ -48,7 +48,7 @@
     justify-content: center;
     align-items: flex-start;
 }
-#yohoho-block-content{
+#YOK-block-content{
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -58,11 +58,11 @@
     align-items: center;
     padding-top: .3em;
 }
-.yohoho-block a {
+.YOK-block a {
     text-decoration: none;
     color: antiquewhite;
 }
-.yohoho-itm{
+.YOK-itm{
     margin:5px 5px 5px 0;
     border-radius: 6px;
     background-color: #ff6600;
@@ -73,7 +73,7 @@
     font-weight: 500;
     border: none;
 }
-.yohoho-itm:hover {
+.YOK-itm:hover {
     cursor: pointer;
 }
 
@@ -81,7 +81,7 @@
 * loading
 **/
 
-.yohoho-spinner-box {
+.YOK-spinner-box {
     width: 50px;
     height: 50px;
     display: flex;
@@ -90,34 +90,34 @@
     background-color: transparent;
     margin: auto;
 }
-.yohoho-pulse-container {
+.YOK-pulse-container {
     width: 120px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.yohoho-pulse-bubble {
+.YOK-pulse-bubble {
     width: 15px;
     height: 15px;
     border-radius: 50%;
     background-color: #ff6600;
 }
 
-.yohoho-pulse-bubble-white {
+.YOK-pulse-bubble-white {
     width: 15px;
     height: 15px;
     border-radius: 50%;
     background-color:white;
 }
 
-.yohoho-pulse-bubble-1 {
+.YOK-pulse-bubble-1 {
     animation: yohpulse .4s ease 0s infinite alternate;
 }
-.yohoho-pulse-bubble-2 {
+.YOK-pulse-bubble-2 {
     animation: yohpulse .4s ease .2s infinite alternate;
 }
-.yohoho-pulse-bubble-3 {
+.YOK-pulse-bubble-3 {
     animation: yohpulse .4s ease .4s infinite alternate;
 }
 
@@ -137,7 +137,7 @@
  *logo
  **/
 
-.yohoho-logo-info{
+.YOK-logo-info{
     padding: 0 0.8em;
     display: flex;
     flex-direction: row;
@@ -160,10 +160,10 @@
 
 }
 
-.yohoho-svg-right{
+.YOK-svg-right{
     margin-top: 5px;
 }
-.yohoho-logo-info:hover .yohoho-svg-right{
+.YOK-logo-info:hover .YOK-svg-right{
     -webkit-animation-name: hvr-icon-wobble-horizontal;
     animation-name: hvr-icon-wobble-horizontal;
     -webkit-animation-duration: 1s;
